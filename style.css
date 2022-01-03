@@ -1,4 +1,41 @@
 body {
     background-color: green;
     text-align: center;
+    margin: 0px 0px 50px;
+}
+
+.title {
+    font-size: 70px;
+    margin: 0px 0px;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.startGame {
+    background-color: rgb(209, 88, 98);
+    color: whitesmoke;
+    font-size: 40px;
+    padding: 4px;
+    margin: 0px 30px;
+}
+.startGame:hover {
+    cursor: pointer;
+    background-color: yellow;
+    color: tomato;
+}
+
+.resetGame {
+    background-color: rgb(209, 88, 98);
+    color: whitesmoke;
+    font-size: 40px;
+    padding: 4px;
+    margin: 0px 30px;
+}
+
+.resetGame:hover {
+    cursor: pointer;
+    background-color: yellow;
+    color: tomato;
 }
