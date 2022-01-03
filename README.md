@@ -27,3 +27,7 @@ Click [here](https://bicyclecards.com/how-to-play/blackjack/) for more info!
 #### The Dealer's Go-To
 
 The dealer will always stand if they have a total of 17 or more points. If the total points of the dealer is 16 or less, the dealer must continue to take cards until the total reachs 17 or more. This rule does not apply to other players!
+
+# Wire-Frame
+
+![](blackJack_wireFrame.png)
