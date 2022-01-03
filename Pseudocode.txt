@@ -14,9 +14,10 @@
                 // Ace is counted as 1 or 11 point(s)
                 // Cards 2-10 are worth face values (i.e. 2=2, 3=3, etc.)
                 // Jack, Queen, && King are counted as 10
-            // 
-
-            1) Ace is a special card, it can count as 1 point or 11 points depending on the other cards in a player hand. If a player draws an Ace and the points exceed 21, then the Ace will count as 1 point. If the player draws an Ace and the score does not exceed 21, then the Ace will count as 11.
-            2) Players cannot get any more cards after they reach 21 points or exceeds 21 points
-            3) During the starting phase, each player receives two cards dacing up for everyone to see. However, the dealer has one card facing up and one card facing down for no one to see.
-            4) The Card Decks are shuffled before the start of the game.
+            // Card Decks are shuffled before the start
+        // Score cannot exceed 21
+            // players cannot receive any more cards after they reach 21 points or exceed 21
+                // Players cannot receive any more cards once player || dealer wins
+        // dealer && player receive 2 cards after startGame Button is clicked
+            // dealer receives two cards, one facing up for everyne to see && one facing down so no one can see
+            // player receives two cards facing up for everyne to see

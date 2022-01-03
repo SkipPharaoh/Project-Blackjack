@@ -30,4 +30,4 @@ The dealer will always stand if they have a total of 17 or more points. If the t
 
 # Wire-Frame
 
-![](blackJack_wireFrame.png)
+![](./blackJack_wireFrame.png)
