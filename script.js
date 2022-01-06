@@ -7,15 +7,53 @@ const hit = document.querySelector('.hit')
 const stand = document.querySelector('.stand')
 const dealerCard = document.querySelector('.dealerCard1')
 const playerCard = document.querySelector('.playerCard2')
-    // create an object with the card values that equal to the points (cardPoints)
+
+// Event Listeners
+startGame.addEventListener('click', beginGame);
+resetGame.addEventListener('click', rstGame);
+hit.addEventListener('click', hitCard);
+stand.addEventListener('click', noCard);
+score.addEventListener('load', scoreCard);
 
 
-
-// Card values && card suits
+// Card values, Card suits, && Points
 const cardSuits = ['H', 'D', 'S', 'C']
-const cardValues = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+const cardValues = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'J', 'Q', 'K']
+const points = {
+    '2': 2,
+    '3': 3,
+    '4': 4,
+    '5': 5,
+    '6': 6,
+    '7': 7,
+    '8': 8,
+    '9': 9,
+    '0': 10,
+    'J': 10,
+    'Q': 10,
+    'K': 10
+}
 const dealersDeck = []
 const playersDeck = []
+
+// Ace points
+// let count = 0;
+// const aces = []
+// for (let card of hand) {
+//     let value = card;
+//     if ( value === 'A') {
+//         count++
+//         aces.add(card)
+//     }
+//     else {
+//         count += points.get(value)
+//     }
+// }
+// for (let card of aces){
+//     if (count <= 11) {
+//         count += 10
+//     }
+// }
 
 // Construct Deck
 function cardDeck() {
@@ -27,7 +65,11 @@ function cardDeck() {
         for (let j=0; j < cardValues.length; j++){
             const values = cardValues[j];
             const suits = cardSuits[i];
-            deck.push(values + suits)
+            if (j >= 10){
+                deck.push({value:values, suit:suits, points: 10})
+            }
+            else 
+            {deck.push({value:values, suit:suits, points: j+1})}
         }
     }
     return deck
@@ -53,44 +95,37 @@ console.log(shuffleDeck);
 
 // Start Button will reveal the cards
 function beginGame(){
-    // shuffledeck (deak is shuffled with the shuffleCard function)
-    // give player && dealer two cards
-    // reveal hands
     while (dealersDeck.length < 2) {
         let card1 = shuffleDeck.pop()
         let card2 = shuffleDeck.pop()
         playersDeck.push(card1)
         dealersDeck.push(card2)
         playerCard.classList.add('classShowing')
-        playerCard.append(card1)
+        playerCard.append(`${card1.value}${card1.suit}`)
         // playerCard.append(card1)
         dealerCard.classList.add('classShowing')
-        dealerCard.innerHTML = card2
+        dealerCard.innerHTML = `${card2.value}${card2.suit}`
+        // dealerCard.append(`${card2.value}${card2.suit}`)
     }
     console.log(dealerCard.classList)
     console.log('This Starts The Game!')
+    return scoreCard()
 }
 
 // Reset Button to reset the table & hide hands
 function rstGame(){
-    // refresh page location.reload()
-    // Removes visibility of the cards
     return location.reload()
 }
 
 // Hit Button gives player an additional card
 function hitCard(){
-    // gives player one extra card
-        // add element to player's cards (element is players card)
-        // removes given card from array
     if (playersDeck.length > 1) {
         let card1 = shuffleDeck.pop()
         playersDeck.push(card1)
         playerCard.classList.add('classShowing')
-        playerCard.prepend(card1)
+        playerCard.prepend(`${card1.value}${card1.suit}`)
     }
-    // console.log(card)
-    // return card1
+    return scoreCard()
 }
 
 
@@ -99,6 +134,13 @@ function noCard(){
     // This stops player moves
     // Reveals dealer's facedown card
     // starts dealer moves function
+    if (hitCard() === true) {
+        hit.removeEventListener('click', hitCard)
+    }
+    else {
+        console.log('I think this works')
+    }
+    
     console.log('I dare say, No More Cards')
 }
 
@@ -109,17 +151,40 @@ function scoreCard(){
     // Checks if player's score is more than dealer's score, if dealer stands
     // Checks if player's score exceeds 21 (bust)
     // use a toggle
+    let gameScore = []
+    let playerScore = 0
+    for (let i = 0; i<playersDeck.length; i++){
+        let card1Score = playersDeck[i].points
+        gameScore.push(card1Score)
+    }
+    for (let j = 0; j < gameScore.length; j++) {
+        playerScore += gameScore[j]
+    }
     console.log('This is how we keep score')
+    return playerScore
 }
 console.log()
 
-// Event Listeners
-startGame.addEventListener('click', beginGame);
-resetGame.addEventListener('click', rstGame);
-hit.addEventListener('click', hitCard);
-stand.addEventListener('click', noCard);
-score.addEventListener('load', scoreCard);
+// Winning Condition
+
+function winnerCheck(){
+    let pS = playerScore
+    if (pS > 21){
+        return "Bust"
+    }
+    else if (pS === 21){
+        return "Blackjack"
+    }
+    else {
+        return pS
+    }
+}
+
+
 
 // setTimeout() for score
 // variable with default score of 0
 // every time a card is add, add score to total
+
+// I could use the append in stay function to grab hidden item in dealersDeck
+// grabbed item can be append to the dealersDeck to make it visible
