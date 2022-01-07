@@ -17,7 +17,8 @@ score.addEventListener('load', scoreCard);
 
 
 // Card values, Card suits, && Points
-const cardSuits = ['H', 'D', 'S', 'C']
+// const cardSuits = ['H', 'D', 'S', 'C']
+const cardSuits = ['♥', '♦', '♠', '♣']
 const cardValues = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'J', 'Q', 'K']
 const points = {
     '2': 2,
@@ -83,8 +84,6 @@ function shuffleCard(deck) {
         // Code below came from stackoverflow (link will be pasted here)
         [deck[i - 1], deck[shuffle]] = [deck[shuffle], deck[i - 1]];
     }
-    // let shuffle = Math.floor(Math.random() * 51)
-    // const card1 = deck[shuffle]
     return deck
     // return 'https://deckofcardsapi.com/static/img/AS.png'
 }
@@ -102,15 +101,14 @@ function beginGame(){
         dealersDeck.push(card2)
         playerCard.classList.add('classShowing')
         playerCard.append(`${card1.value}${card1.suit}`)
-        // playerCard.append(card1)
         dealerCard.classList.add('classShowing')
         dealerCard.innerHTML = `${card2.value}${card2.suit}`
-        // dealerCard.append(`${card2.value}${card2.suit}`)
     }
     console.log(dealerCard.classList)
     console.log('This Starts The Game!')
     return scoreCard()
 }
+
 
 // Reset Button to reset the table & hide hands
 function rstGame(){
@@ -124,60 +122,111 @@ function hitCard(){
         playersDeck.push(card1)
         playerCard.classList.add('classShowing')
         playerCard.prepend(`${card1.value}${card1.suit}`)
+        return scoreCard()
     }
-    return scoreCard()
 }
 
 
 // Stand Button stops player from getting another card
 function noCard(){
-    // This stops player moves
-    // Reveals dealer's facedown card
-    // starts dealer moves function
-    if (hitCard() === true) {
+    if (dealersDeck.length === 2 ){
+        stand.removeEventListener('click', noCard)
         hit.removeEventListener('click', hitCard)
+        let card2 = dealersDeck[0]
+        dealerCard.prepend(`${card2.value}${card2.suit}`)
+        console.log('I dare say, No More Cards')
+        console.log(dealersDeck[0])
     }
-    else {
-        console.log('I think this works')
-    }
-    
-    console.log('I dare say, No More Cards')
+    dealersMove()
+    setTimeout(winnerCheck(), 10000)
+    return dealerScore()
 }
 
-// Score will keep track of total value of player's cards
+// P1 & houseScore Variable
+let p1Score = 0
+let houseScore = 0
+
+// Player's Score Tracker
 function scoreCard(){
-    // Adds the players card values together
-    // Calculates if player reaches 21
-    // Checks if player's score is more than dealer's score, if dealer stands
-    // Checks if player's score exceeds 21 (bust)
-    // use a toggle
     let gameScore = []
     let playerScore = 0
-    for (let i = 0; i<playersDeck.length; i++){
+    for (let i = 0; i < playersDeck.length; i++){
         let card1Score = playersDeck[i].points
         gameScore.push(card1Score)
     }
     for (let j = 0; j < gameScore.length; j++) {
         playerScore += gameScore[j]
     }
+    score.innerHTML = playerScore
     console.log('This is how we keep score')
+    p1Score = playerScore
+    setTimeout(winnerCheck(), 5000)
     return playerScore
 }
-console.log()
+
+
+// Dealer's Score tracker
+function dealerScore(){
+    let dealScore = []
+    let dealsScore = 0
+    for (let i = 0; i < dealersDeck.length; i++){
+        let card2Score = dealersDeck[i].points
+        dealScore.push(card2Score)
+    }
+    for (let j = 0; j < dealScore.length; j++){
+        dealsScore += dealScore[j]
+    }
+    houseScore = dealsScore
+    winnerCheck()
+    return houseScore
+}
+
 
 // Winning Condition
-
 function winnerCheck(){
-    let pS = playerScore
-    if (pS > 21){
-        return "Bust"
+    if (p1Score > 21){
+        alert("Player Loses")
+        return location.reload()
     }
-    else if (pS === 21){
-        return "Blackjack"
+    else if (p1Score === 21){
+        alert("Blackjack")
+        return location.reload()
+    }
+    else if (houseScore > 21){
+        alert("Dealer Bust, Player Wins")
+        return location.reload()
+    }
+    else if (houseScore === p1Score){
+        return dealersMove
     }
     else {
-        return pS
+        console.log('work')
     }
+}
+
+// Dealer's Move
+function dealersMove(){
+    if (houseScore < 17){
+        let card2 = shuffleDeck.pop()
+        dealersDeck.push(card2)
+        let nextCard = dealersDeck[dealersDeck.length - 1]
+        dealerCard.prepend(`${card2.value}${card2.suit}`)
+        console.log(nextCard)
+        // console.log(houseScore)
+    }
+    else if (houseScore < p1Score && p1Score != 21){
+        let card2 = shuffleDeck.pop()
+        dealersDeck.push(card2)
+        let nextCard = dealersDeck[dealersDeck.length - 1]
+        dealerCard.prepend(`${card2.value}${card2.suit}`)
+        console.log(nextCard)
+        // console.log(houseScore)
+    }
+    else {
+        console.log(`Dealer's points:${dealerScore()} is over their hit limit!`)
+    }
+    setTimeout(winnerCheck(), 5000)
+    console.log(`Dealer has ${dealerScore()} points!`)
 }
 
 
