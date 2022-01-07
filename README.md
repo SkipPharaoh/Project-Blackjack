@@ -1,6 +1,6 @@
 # Project-Blackjack
 
-This a browser-based game, using mostly JaveScript. The project can be found [here](https://git.generalassemb.ly/seir-1213/Project-1-Intro-Purple)
+This a browser-based game, using mostly JaveScript. The project details can be found [here](https://git.generalassemb.ly/seir-1213/Project-1-Intro-Purple), while the actual game can be found [here!](https://skippharaoh.github.io/Project-Blackjack/).
 
 ## Card Rules
 
