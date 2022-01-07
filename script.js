@@ -7,7 +7,7 @@ const hit = document.querySelector('.hit')
 const stand = document.querySelector('.stand')
 const dealerCard = document.querySelector('.dealerCard1')
 const playerCard = document.querySelector('.playerCard2')
-
+let playerStands = false
 // Event Listeners
 startGame.addEventListener('click', beginGame);
 resetGame.addEventListener('click', rstGame);
@@ -19,7 +19,7 @@ score.addEventListener('load', scoreCard);
 // Card values, Card suits, && Points
 // const cardSuits = ['H', 'D', 'S', 'C']
 const cardSuits = ['♥', '♦', '♠', '♣']
-const cardValues = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'J', 'Q', 'K']
+const cardValues = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
 const points = {
     '2': 2,
     '3': 3,
@@ -29,7 +29,7 @@ const points = {
     '7': 7,
     '8': 8,
     '9': 9,
-    '0': 10,
+    '10': 10,
     'J': 10,
     'Q': 10,
     'K': 10
@@ -51,7 +51,7 @@ const playersDeck = []
 //     }
 // }
 // for (let card of aces){
-//     if (count <= 11) {
+//     if (count !<= 11) {
 //         count += 10
 //     }
 // }
@@ -86,6 +86,7 @@ function shuffleCard(deck) {
     }
     return deck
     // return 'https://deckofcardsapi.com/static/img/AS.png'
+    // return 'https://deckofcardsapi.com/static/img/back.png'
 }
 
 const cards = cardDeck();
@@ -136,6 +137,7 @@ function noCard(){
         dealerCard.prepend(`${card2.value}${card2.suit}`)
         console.log('I dare say, No More Cards')
         console.log(dealersDeck[0])
+        playerStands = true
     }
     dealersMove()
     setTimeout(winnerCheck(), 10000)
@@ -184,23 +186,35 @@ function dealerScore(){
 
 // Winning Condition
 function winnerCheck(){
-    if (p1Score > 21){
-        alert("Player Loses")
-        return location.reload()
+    if (p1Score === 21){
+        stand.removeEventListener('click', noCard)
+        hit.removeEventListener('click', hitCard)
+        score.innerHTML = "BlackJack!"
     }
-    else if (p1Score === 21){
-        alert("Blackjack")
-        return location.reload()
+    else if (playerStands && houseScore > 21){
+        stand.removeEventListener('click', noCard)
+        hit.removeEventListener('click', hitCard)
+        score.innerHTML = "Player Wins!"
     }
-    else if (houseScore > 21){
-        alert("Dealer Bust, Player Wins")
-        return location.reload()
+    else if (playerStands && p1Score > houseScore){
+        stand.removeEventListener('click', noCard)
+        hit.removeEventListener('click', hitCard)
+        score.innerHTML = "Player Wins"
     }
-    else if (houseScore === p1Score){
-        return dealersMove
+    else if (playerStands && houseScore === 21){
+        stand.removeEventListener('click', noCard)
+        hit.removeEventListener('click', hitCard)
+        score.innerHTML = "Dealer Has Blackjack!"
     }
-    else {
-        console.log('work')
+    else if (playerStands && houseScore > p1Score){
+        stand.removeEventListener('click', noCard)
+        hit.removeEventListener('click', hitCard)
+        score.innerHTML = "Dealer Wins"
+    }
+    else if (p1Score > 21){
+        stand.removeEventListener('click', noCard)
+        hit.removeEventListener('click', hitCard)
+        score.innerHTML = "Player Bust"
     }
 }
 
@@ -214,7 +228,7 @@ function dealersMove(){
         console.log(nextCard)
         // console.log(houseScore)
     }
-    else if (houseScore < p1Score && p1Score != 21){
+    else if (houseScore < p1Score){
         let card2 = shuffleDeck.pop()
         dealersDeck.push(card2)
         let nextCard = dealersDeck[dealersDeck.length - 1]
@@ -222,10 +236,8 @@ function dealersMove(){
         console.log(nextCard)
         // console.log(houseScore)
     }
-    else {
-        console.log(`Dealer's points:${dealerScore()} is over their hit limit!`)
-    }
-    setTimeout(winnerCheck(), 5000)
+    console.log(`Dealer's points:${dealerScore()} is over their hit limit!`)
+    setTimeout(winnerCheck, 3000)
     console.log(`Dealer has ${dealerScore()} points!`)
 }
 

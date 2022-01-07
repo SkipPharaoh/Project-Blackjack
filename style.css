@@ -1,14 +1,20 @@
 body {
     background-color: green;
     text-align: center;
+    background-image: url("https://coolwallpapers.me/picsup/3038107-chips_gambling_poker_table.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
     margin: 0px 0px 50px;
+}
+.container{
+    background-color: #0d0d0dbe;
 }
 
 .title {
     font-size: 70px;
     margin: 0px 0px;
-    text-shadow: 0px 0px 10px rgb(251, 255, 0);
-    color: black;
+    text-shadow: 10px 10px 10px #319702;
+    color: #F2EBD5;
 }
 .players {
     margin: 20px 20px;
@@ -17,14 +23,14 @@ body {
     /* margin-bottom: 275px */
 }
 #dealer {
-    color: black;
+    color: #F24141;
     margin: 20px 0px;
     font-size: 50px;
     border: 1px solid goldenrod;
     width: 350px;
 }
 #player {
-    color: whitesmoke;
+    color: #F2F2F2;
     margin: 20px 0px;
     font-size: 50px;
     border: 1px solid goldenrod;
@@ -66,7 +72,7 @@ body {
     color: tomato;
 }
 .stand {
-    background-color: rgb(0, 0, 0);
+    background-color: #0D0D0D;
     color: whitesmoke;
     font-size: 20px;
     padding: 4px;
@@ -78,7 +84,7 @@ body {
     color: tomato;
 }
 .hit {
-    background-color: rgb(0, 0, 0);
+    background-color: #0D0D0D;
     color: whitesmoke;
     font-size: 20px;
     padding: 4px;
