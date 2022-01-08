@@ -104,6 +104,7 @@ function beginGame(){
         playerCard.append(`${card1.value}${card1.suit}`)
         dealerCard.classList.add('classShowing')
         dealerCard.innerHTML = `${card2.value}${card2.suit}`
+        startGame.removeEventListener('click', beginGame)
     }
     console.log(dealerCard.classList)
     console.log('This Starts The Game!')
@@ -130,6 +131,7 @@ function hitCard(){
 
 // Stand Button stops player from getting another card
 function noCard(){
+    playerStands = true
     if (dealersDeck.length === 2 ){
         stand.removeEventListener('click', noCard)
         hit.removeEventListener('click', hitCard)
@@ -137,10 +139,10 @@ function noCard(){
         dealerCard.prepend(`${card2.value}${card2.suit}`)
         console.log('I dare say, No More Cards')
         console.log(dealersDeck[0])
-        playerStands = true
+        winnerCheck()
+        dealersMove()
+        // setTimeout(winnerCheck(), 10000)
     }
-    dealersMove()
-    setTimeout(winnerCheck(), 10000)
     return dealerScore()
 }
 
@@ -220,32 +222,38 @@ function winnerCheck(){
 
 // Dealer's Move
 function dealersMove(){
-    if (houseScore < 17){
-        let card2 = shuffleDeck.pop()
-        dealersDeck.push(card2)
-        let nextCard = dealersDeck[dealersDeck.length - 1]
-        dealerCard.prepend(`${card2.value}${card2.suit}`)
-        console.log(nextCard)
-        // console.log(houseScore)
+    dealerScore()
+    if ( houseScore > p1Score){
+        dealerScore()
+        // winnerCheck()
     }
-    else if (houseScore < p1Score){
+    if ( p1Score >= 21){
+        dealerScore()
+        // winnerCheck()
+    }
+    if (houseScore >= 21){
+        dealerScore()
+        // winnerCheck()
+    }
+    if (houseScore < p1Score){
+        dealerScore()
+        // winnerCheck()
         let card2 = shuffleDeck.pop()
         dealersDeck.push(card2)
         let nextCard = dealersDeck[dealersDeck.length - 1]
         dealerCard.prepend(`${card2.value}${card2.suit}`)
         console.log(nextCard)
-        // console.log(houseScore)
+    }
+    if (houseScore <= 17){
+        dealerScore()
+        // winnerCheck()
+        let card2 = shuffleDeck.pop()
+        dealersDeck.push(card2)
+        let nextCard = dealersDeck[dealersDeck.length - 1]
+        dealerCard.prepend(`${card2.value}${card2.suit}`)
+        console.log(nextCard)
     }
     console.log(`Dealer's points:${dealerScore()} is over their hit limit!`)
-    setTimeout(winnerCheck, 3000)
+    // setTimeout(winnerCheck, 3000)
     console.log(`Dealer has ${dealerScore()} points!`)
 }
-
-
-
-// setTimeout() for score
-// variable with default score of 0
-// every time a card is add, add score to total
-
-// I could use the append in stay function to grab hidden item in dealersDeck
-// grabbed item can be append to the dealersDeck to make it visible

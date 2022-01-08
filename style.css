@@ -13,7 +13,7 @@ body {
 .title {
     font-size: 70px;
     margin: 0px 0px;
-    text-shadow: 10px 10px 10px #319702;
+    text-shadow: -5px -5px 5px #319702;
     color: #F2EBD5;
 }
 .players {

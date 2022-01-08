@@ -6,7 +6,7 @@ This a browser-based game, using mostly JaveScript. The project details can be f
 
 1) Ace is a special card, it can count as 1 point or 11 points depending on the other cards in a player hand. If a player draws an Ace and the points exceed 21, then the Ace will count as 1 point. If the player draws an Ace and the score does not exceed 21, then the Ace will count as 11.
 2) Players cannot get any more cards after they reach 21 points or exceeds 21 points
-3) During the starting phase, each player receives two cards dacing up for everyone to see. However, the dealer has one card facing up and one card facing down for no one to see.
+3) During the starting phase, each player receives two cards facing up for everyone to see. However, the dealer has one card facing up and one card facing down for no one to see.
 4) The Card Decks are shuffled before the start of the game.
 
 ## Blackjack Game Overview
