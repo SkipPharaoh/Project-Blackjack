@@ -14,13 +14,13 @@ This a browser-based game, using mostly JaveScript. The project details can be f
 Blackjack is a comparitive card game that can consist of 2 or more players and a dealer. This game is also know to some as twenty-one. Essentially each player competes against the dealer, however the players do not compete against each other players. The game consists of six standard 52 card decks. The main objective of Blackjack is to beat the dealer!
 
 In order to complete the objective, players have one of three ways of doing so:
-    1) Have a total of 21 points
-    2) Have a final score higher than the dealer without exceeding 21 points
+    1) Have a total of 21 points.
+    2) Have a final score higher than the dealer without exceeding 21 points.
     3) The dealer exceeds 21 points.
 
 In order to lose to the dealer in one of two ways:
-    1) Player hand exceeds 21
-    2) The dealer has a greater value than the player at the end of the round
+    1) Player hand exceeds 21.
+    2) The dealer has a greater value than the player at the end of the round.
 
 Click [here](https://bicyclecards.com/how-to-play/blackjack/) for more info!
 
