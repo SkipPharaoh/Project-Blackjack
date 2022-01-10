@@ -78,14 +78,14 @@ function drawDealerCard(){
 }
 
 // HIDDEN Card
- function hiddenCard(){
+function hiddenCard(){
     let img1 = document.createElement("img")
     img1.setAttribute("id", "back")
     img1.src = 'https://deckofcardsapi.com/static/img/back.png'
     dealersDeck[2] = img1
     dealerCard.classList.add('classShowing')
     dealerCard.prepend(img1)
- }
+}
 
 // Draw Card for player function
 function drawPlayerCard(){
@@ -185,12 +185,12 @@ function winnerCheck(){
     else if (playerStands && houseScore > 21){
         stand.removeEventListener('click', noCard)
         hit.removeEventListener('click', hitCard)
-        score.innerHTML = "Player Wins!"
+        score.innerHTML = "Dealer Bust!"
     }
     else if (playerStands && p1Score > houseScore){
         stand.removeEventListener('click', noCard)
         hit.removeEventListener('click', hitCard)
-        score.innerHTML = "Player Wins"
+        score.innerHTML = "Player Wins!"
     }
     else if (playerStands && houseScore === 21){
         stand.removeEventListener('click', noCard)
@@ -200,17 +200,17 @@ function winnerCheck(){
     else if (playerStands && houseScore > p1Score){
         stand.removeEventListener('click', noCard)
         hit.removeEventListener('click', hitCard)
-        score.innerHTML = "Dealer Wins"
+        score.innerHTML = "Dealer Wins!"
     }
     else if (p1Score > 21){
         stand.removeEventListener('click', noCard)
         hit.removeEventListener('click', hitCard)
-        score.innerHTML = "Player Bust"
+        score.innerHTML = "Player Bust!"
     }
     else if (playerStands && houseScore === p1Score){
         stand.removeEventListener('click', noCard)
         hit.removeEventListener('click', hitCard)
-        score.innerHTML = "Tied"
+        score.innerHTML = "Tied-Game!"
     }
 }
 
