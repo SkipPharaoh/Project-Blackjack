@@ -2,6 +2,18 @@
 
 This a browser-based game, using mostly JaveScript. The project details can be found [here](https://git.generalassemb.ly/seir-1213/Project-1-Intro-Purple), while the actual game can be found [here!](https://skippharaoh.github.io/Project-Blackjack/).
 
+# MVP Goal
+    1) Title that tells people what game they are about to play.
+    2) Have a game layout with areas for both dealer's hand & player's hand.
+    3) A start button that deals 2 faceup cards to players & 1 faceup card with 1 facedown card.
+    4) Reset button that removes all cards from the hands reshuffles the deck.
+    5) Hit button the gives player one additional card.
+    6) Stand button that ends player turn and start dealer turn. Also executes the dealer's move.
+    7) A function that tracks the score of the player's hand & another function that tracks the dealer's hands.
+    8) A function that decides who wins & informs player who wins.
+
+
+
 ## Card Rules
 
 1) Ace is a special card, it can count as 1 point or 11 points depending on the other cards in a player hand. If a player draws an Ace and the points exceed 21, then the Ace will count as 1 point. If the player draws an Ace and the score does not exceed 21, then the Ace will count as 11.
@@ -31,3 +43,7 @@ The dealer will always stand if they have a total of 17 or more points. If the t
 # Wire-Frame
 
 ![](./blackJack_wireFrame.png)
+![](./Screenshots/blackjack1.png)
+![](./Screenshots/blackjack2.png)
+![](./Screenshots/blackjack3.png)
+![](./Screenshots/blackjack4.png)
