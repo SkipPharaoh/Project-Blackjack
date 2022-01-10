@@ -1,6 +1,6 @@
 # Project-Blackjack
 
-This a browser-based game, using mostly JaveScript. The project details can be found [here](https://git.generalassemb.ly/seir-1213/Project-1-Intro-Purple), while the actual game can be found [here!](https://skippharaoh.github.io/Project-Blackjack/).
+This a browser-based game, using mostly JavaScript. The project details can be found [here](https://git.generalassemb.ly/seir-1213/Project-1-Intro-Purple), while the actual game can be found [here!](https://skippharaoh.github.io/Project-Blackjack/).
 
 # MVP Goal
     1) Title that tells people what game they are about to play.
