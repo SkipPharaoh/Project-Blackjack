@@ -1,15 +1,23 @@
 body {
     background-color: green;
     text-align: center;
-    background-image: url("https://coolwallpapers.me/picsup/3038107-chips_gambling_poker_table.jpg");
+    background-image: url("https://c4.wallpaperflare.com/wallpaper/616/459/600/card-chips-poker-aces-wallpaper-preview.jpg");
     background-size: cover;
-    background-repeat: no-repeat;
     margin: 0px 0px 50px;
 }
 .container{
     background-color: #0d0d0dbe;
 }
-
+/* img.H,D {
+    position: relative;
+    left: 50px;
+    z-index: 1;
+}
+img.C,S{
+    position: relative;
+    left: 50px;
+    z-index: 1;
+} */
 .title {
     font-size: 70px;
     margin: 0px 0px;
@@ -20,7 +28,6 @@ body {
     margin: 20px 20px;
     display: flex;
     justify-content: center;
-    /* margin-bottom: 275px */
 }
 #dealer {
     color: #F24141;
@@ -102,9 +109,11 @@ body {
     margin: auto;
     height: 25px;
     font-size: 20px;
+    border: 1px solid rgb(209, 88, 98);
+    inline-size: 200px;;
+    overflow-wrap: break-word;
 }
 img {
-    width: 100px;
     height: 100px;
     object-fit: contain;
     display: inline;

@@ -1,5 +1,4 @@
-console.log('JS Linked')
-
+// DOM Selectors
 const startGame = document.querySelector('.startGame')
 const resetGame = document.querySelector('.resetGame')
 const score = document.querySelector('.score')
@@ -8,6 +7,7 @@ const stand = document.querySelector('.stand')
 const dealerCard = document.querySelector('.dealerCard1')
 const playerCard = document.querySelector('.playerCard2')
 let playerStands = false
+
 // Event Listeners
 startGame.addEventListener('click', beginGame);
 resetGame.addEventListener('click', rstGame);
@@ -15,11 +15,9 @@ hit.addEventListener('click', hitCard);
 stand.addEventListener('click', noCard);
 score.addEventListener('load', scoreCard);
 
-
 // Card values, Card suits, && Points
-// const cardSuits = ['H', 'D', 'S', 'C']
-const cardSuits = ['♥', '♦', '♠', '♣']
-const cardValues = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+const cardSuits = ['H', 'D', 'S', 'C']
+const cardValues = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'J', 'Q', 'K']
 const points = {
     '2': 2,
     '3': 3,
@@ -29,7 +27,7 @@ const points = {
     '7': 7,
     '8': 8,
     '9': 9,
-    '10': 10,
+    '0': 10,
     'J': 10,
     'Q': 10,
     'K': 10
@@ -37,29 +35,8 @@ const points = {
 const dealersDeck = []
 const playersDeck = []
 
-// Ace points
-// let count = 0;
-// const aces = []
-// for (let card of hand) {
-//     let value = card;
-//     if ( value === 'A') {
-//         count++
-//         aces.add(card)
-//     }
-//     else {
-//         count += points.get(value)
-//     }
-// }
-// for (let card of aces){
-//     if (count !<= 11) {
-//         count += 10
-//     }
-// }
-
 // Construct Deck
 function cardDeck() {
-    // const cardSuits = ['H', 'D', 'S', 'C']
-    // const cardValues = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
     const deck = [];
     const img = `https://deckofcardsapi.com/static/img/2A.png`
     for (let i=0; i < cardSuits.length; i++) {
@@ -75,7 +52,6 @@ function cardDeck() {
     }
     return deck
 }
-console.log(cardDeck())
 
 // The Deck Will Shuffle
 function shuffleCard(deck) {
@@ -85,32 +61,52 @@ function shuffleCard(deck) {
         [deck[i - 1], deck[shuffle]] = [deck[shuffle], deck[i - 1]];
     }
     return deck
-    // return 'https://deckofcardsapi.com/static/img/AS.png'
-    // return 'https://deckofcardsapi.com/static/img/back.png'
 }
 
 const cards = cardDeck();
 const shuffleDeck = shuffleCard(cards)
-console.log(shuffleDeck);
+
+// Draw Card for dealer Function
+function drawDealerCard(){
+    let card2 = shuffleDeck.pop()
+    let img2 = document.createElement("img")
+    img2.setAttribute("class", `${card2.suit}`)
+    img2.src = `https://deckofcardsapi.com/static/img/${card2.value}${card2.suit}.png`
+    dealersDeck.push(img2, card2)
+    dealerCard.classList.add('classShowing')
+    dealerCard.prepend(img2)
+}
+
+// HIDDEN Card
+ function hiddenCard(){
+    let img1 = document.createElement("img")
+    img1.setAttribute("id", "back")
+    img1.src = 'https://deckofcardsapi.com/static/img/back.png'
+    dealersDeck[2] = img1
+    dealerCard.classList.add('classShowing')
+    dealerCard.prepend(img1)
+ }
+
+// Draw Card for player function
+function drawPlayerCard(){
+    let card1 = shuffleDeck.pop()
+    let img1 = document.createElement("img")
+    img1.setAttribute("class", `${card1.suit}`)
+    img1.src = `https://deckofcardsapi.com/static/img/${card1.value}${card1.suit}.png`
+    playersDeck.push(img1, card1)
+    playerCard.classList.add('classShowing')
+    playerCard.prepend(img1)
+}
 
 // Start Button will reveal the cards
 function beginGame(){
-    while (dealersDeck.length < 2) {
-        let card1 = shuffleDeck.pop()
-        let card2 = shuffleDeck.pop()
-        playersDeck.push(card1)
-        dealersDeck.push(card2)
-        playerCard.classList.add('classShowing')
-        playerCard.append(`${card1.value}${card1.suit}`)
-        dealerCard.classList.add('classShowing')
-        dealerCard.innerHTML = `${card2.value}${card2.suit}`
-        startGame.removeEventListener('click', beginGame)
-    }
-    console.log(dealerCard.classList)
-    console.log('This Starts The Game!')
+    drawDealerCard()
+    drawPlayerCard()
+    drawPlayerCard()
+    startGame.removeEventListener('click', beginGame)
+    hiddenCard()
     return scoreCard()
 }
-
 
 // Reset Button to reset the table & hide hands
 function rstGame(){
@@ -120,28 +116,24 @@ function rstGame(){
 // Hit Button gives player an additional card
 function hitCard(){
     if (playersDeck.length > 1) {
-        let card1 = shuffleDeck.pop()
-        playersDeck.push(card1)
-        playerCard.classList.add('classShowing')
-        playerCard.prepend(`${card1.value}${card1.suit}`)
-        return scoreCard()
+        drawPlayerCard()
+        scoreCard()
     }
 }
-
 
 // Stand Button stops player from getting another card
 function noCard(){
     playerStands = true
-    if (dealersDeck.length === 2 ){
+    let remove = document.getElementById('back')
+    remove.remove()
+    dealersDeck.splice(-1)
+    drawDealerCard()
+    if (dealersDeck.length === 4 ){
         stand.removeEventListener('click', noCard)
         hit.removeEventListener('click', hitCard)
-        let card2 = dealersDeck[0]
-        dealerCard.prepend(`${card2.value}${card2.suit}`)
-        console.log('I dare say, No More Cards')
-        console.log(dealersDeck[0])
-        winnerCheck()
+        drawDealerCard()
+        dealerScore()
         dealersMove()
-        // setTimeout(winnerCheck(), 10000)
     }
     return dealerScore()
 }
@@ -154,7 +146,7 @@ let houseScore = 0
 function scoreCard(){
     let gameScore = []
     let playerScore = 0
-    for (let i = 0; i < playersDeck.length; i++){
+    for (let i = 1; i < playersDeck.length; i+=2){
         let card1Score = playersDeck[i].points
         gameScore.push(card1Score)
     }
@@ -162,18 +154,16 @@ function scoreCard(){
         playerScore += gameScore[j]
     }
     score.innerHTML = playerScore
-    console.log('This is how we keep score')
     p1Score = playerScore
-    setTimeout(winnerCheck(), 5000)
+    winnerCheck()
     return playerScore
 }
-
 
 // Dealer's Score tracker
 function dealerScore(){
     let dealScore = []
     let dealsScore = 0
-    for (let i = 0; i < dealersDeck.length; i++){
+    for (let i = 1; i < dealersDeck.length; i+=2){
         let card2Score = dealersDeck[i].points
         dealScore.push(card2Score)
     }
@@ -184,7 +174,6 @@ function dealerScore(){
     winnerCheck()
     return houseScore
 }
-
 
 // Winning Condition
 function winnerCheck(){
@@ -218,6 +207,11 @@ function winnerCheck(){
         hit.removeEventListener('click', hitCard)
         score.innerHTML = "Player Bust"
     }
+    else if (playerStands && houseScore === p1Score){
+        stand.removeEventListener('click', noCard)
+        hit.removeEventListener('click', hitCard)
+        score.innerHTML = "Tied"
+    }
 }
 
 // Dealer's Move
@@ -225,35 +219,23 @@ function dealersMove(){
     dealerScore()
     if ( houseScore > p1Score){
         dealerScore()
-        // winnerCheck()
     }
+    dealerScore()
     if ( p1Score >= 21){
         dealerScore()
-        // winnerCheck()
     }
+    dealerScore()
     if (houseScore >= 21){
         dealerScore()
-        // winnerCheck()
     }
+    dealerScore()
     if (houseScore < p1Score){
         dealerScore()
-        // winnerCheck()
-        let card2 = shuffleDeck.pop()
-        dealersDeck.push(card2)
-        let nextCard = dealersDeck[dealersDeck.length - 1]
-        dealerCard.prepend(`${card2.value}${card2.suit}`)
-        console.log(nextCard)
+        drawDealerCard()
     }
-    if (houseScore <= 17){
+    dealerScore()
+    if (houseScore <= 17 && p1Score > houseScore){
         dealerScore()
-        // winnerCheck()
-        let card2 = shuffleDeck.pop()
-        dealersDeck.push(card2)
-        let nextCard = dealersDeck[dealersDeck.length - 1]
-        dealerCard.prepend(`${card2.value}${card2.suit}`)
-        console.log(nextCard)
+        drawDealerCard()
     }
-    console.log(`Dealer's points:${dealerScore()} is over their hit limit!`)
-    // setTimeout(winnerCheck, 3000)
-    console.log(`Dealer has ${dealerScore()} points!`)
 }
