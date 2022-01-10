@@ -8,16 +8,6 @@ body {
 .container{
     background-color: #0d0d0dbe;
 }
-/* img.H,D {
-    position: relative;
-    left: 50px;
-    z-index: 1;
-}
-img.C,S{
-    position: relative;
-    left: 50px;
-    z-index: 1;
-} */
 .title {
     font-size: 70px;
     margin: 0px 0px;
