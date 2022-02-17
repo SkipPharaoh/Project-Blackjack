@@ -1,3 +1,5 @@
+![GitHub language count](https://img.shields.io/github/languages/count/SkipPharaoh/Project-Blackjack?color=ff0000&style=plastic)
+![GitHub forks](https://img.shields.io/github/forks/SkipPharaoh/Project-Blackjack?logoColor=ff0000&style=social)
 # Project-Blackjack
 
 This a browser-based game, using mostly JavaScript. The project details can be found [here](https://git.generalassemb.ly/seir-1213/Project-1-Intro-Purple), while the actual game can be found [here!](https://skippharaoh.github.io/Project-Blackjack/).
